@@ -96,7 +96,7 @@ public class Main {
         
 
         System.out.println(filePath);
-        System.exit(0);
+        System.exit(5);
     }
 	
 	

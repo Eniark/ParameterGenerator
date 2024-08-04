@@ -27,7 +27,7 @@ public class Utilities {
 	    File inputFile = new File(inputsDir, fileName);
 	    
 	    if (!inputFile.exists()) {
-	    	throw new IOException(String.format("File \"%s\" not found. Please put the input file in \"%s.\" folder.", fileName, Configurations.INPUTS_DIRECTORY));
+	    	throw new IOException(String.format("File \"%s\" not found. Please put the input file in \"%s\" folder.", fileName, Configurations.INPUTS_DIRECTORY));
 	    }
 	    
         FileReader fileReader = new FileReader(inputFile);
