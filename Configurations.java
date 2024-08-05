@@ -3,8 +3,8 @@ package createParameterSets;
 import java.text.SimpleDateFormat;
 
 public class Configurations {
-	public static final String INPUT_FILE_NAME = "Development Tests.csv";
-	public static final String OUTPUT_FILE_NAME = INPUT_FILE_NAME + "_Combinations.csv";
+	public static final String INPUT_FILE_NAME = null;
+	public static final String OUTPUT_FILE_NAME = null;
 	public static final String RESULTS_DIRECTORY = "Outputs";
 	public static final String INPUTS_DIRECTORY = "Inputs";
 	

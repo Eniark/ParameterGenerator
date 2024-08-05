@@ -31,8 +31,7 @@ public class Combinations {
         }
         catch (NullPointerException e) {
         	System.out.println(String.format("Incorrect parameter: %s", parameters.toString()));
-        	throw new IllegalArgumentException("The parameter is missing a part (key, type, possibleValues, etc.)");
-        	
+        	throw new IllegalArgumentException("The parameter template is missing a part (key, type, possibleValues, etc.)");
         }
         	
         type = type.toLowerCase();
@@ -132,7 +131,7 @@ public class Combinations {
 
         for (Object value : possibleValues) {
             if (Utilities.isDouble(value.toString())) {
-                current.addProperty(key, Integer.parseInt((String) value));
+                current.addProperty(key, ((Double) value).intValue());
             } else {
                 current.addProperty(key, value.toString());
             }

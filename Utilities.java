@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.List;
 
 import com.opencsv.CSVParser;
@@ -15,27 +16,39 @@ import com.opencsv.CSVWriterBuilder;
 
 public class Utilities {
     public static CSVReader readCSV(String fileName, char delimiter) throws IOException {
-    	  
-//        String RESOURCES_ROOT_PATH = "src/main/resources/";
-//      FileReader fileReader = new FileReader(RESOURCES_ROOT_PATH + fileName);
+    	FileReader fileReader;
+        
+        if (Configurations.DEBUG==1) {
+    	    
+        	String RESOURCES_ROOT_PATH = "src/main/resources/";
+            fileReader = new FileReader(RESOURCES_ROOT_PATH + fileName);
+//            File inputFile = new File(fileReader);
+    	    
+        }
+        
+        else {
+        	File inputsDir = new File("../Parameter Generator/" + Configurations.INPUTS_DIRECTORY);
+    	    if (!inputsDir.exists()) {
+    	    	throw new IOException(String.format("Directory for CSV files \"%s\" not found. Please put the input files in there.", Configurations.INPUTS_DIRECTORY));
+    	    }
 
-	    File inputsDir = new File("../Parameter Generator/" + Configurations.INPUTS_DIRECTORY);
-	    if (!inputsDir.exists()) {
-	    	throw new IOException(String.format("Directory for CSV files \"%s\" not found. Please put the input files in there.", Configurations.INPUTS_DIRECTORY));
-	    }
-
-	    File inputFile = new File(inputsDir, fileName);
-	    
-	    if (!inputFile.exists()) {
-	    	throw new IOException(String.format("File \"%s\" not found. Please put the input file in \"%s\" folder.", fileName, Configurations.INPUTS_DIRECTORY));
-	    }
-	    
-        FileReader fileReader = new FileReader(inputFile);
+    	    File inputFile = new File(inputsDir, fileName);
+          
+          
+    	    
+    	    if (!inputFile.exists()) {
+    	    	throw new IOException(String.format("File \"%s\" not found. Please put the input file in \"%s\" folder.", fileName, Configurations.INPUTS_DIRECTORY));
+    	    }
+    	    
+            fileReader = new FileReader(inputFile);
+        }
+        
         CSVParser parser = new CSVParserBuilder()
             .withSeparator(delimiter)
             .build();
 
-        CSVReader reader = new CSVReaderBuilder(fileReader)
+
+		CSVReader reader = new CSVReaderBuilder(fileReader)
             .withCSVParser(parser)
             .build();
 
@@ -82,11 +95,6 @@ public class Utilities {
         return outputFile.getAbsolutePath();
         
     }
-    
-    public static boolean nullSafeEquals(String str1, String str2)  {
-    	return str1!=null && str1.toLowerCase().trim().equals(str2);    	
-    }
-        
     
 
     public static String removeSuffixFromKeys(String str) {
